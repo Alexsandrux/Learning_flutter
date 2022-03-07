@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(flutter_test_1 LANGUAGES CXX)
+project(flutter_app_from_scratch_1 LANGUAGES CXX)
 
-set(BINARY_NAME "flutter_test_1")
+set(BINARY_NAME "flutter_app_from_scratch_1")
 
 cmake_policy(SET CMP0063 NEW)
 

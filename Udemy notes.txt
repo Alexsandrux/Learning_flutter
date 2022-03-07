@@ -1,0 +1,3 @@
+Flutter is both a toolset and a framework for Dart language.
+A flutter app is an application where the developer builds the app by adding widgets.
+The widgets are the building blocks of your user interface. In flutter nearly everything is a widget.
