@@ -1,3 +1,11 @@
 Flutter is both a toolset and a framework for Dart language.
 A flutter app is an application where the developer builds the app by adding widgets.
 The widgets are the building blocks of your user interface. In flutter nearly every graphic component is a widget.
+
+
+Stateless vs Statefull Widget
+Stateless - avem metoda build care este folosita sa fie afisata interfata. Poate primii si date de intrare, widget urile stateless
+rerendandu-se dupa ce se schimba datele de intrare
+
+Statefull widgets pe langa acest lucru avem si date interioare widget-ului care provoaca ca aplicatia sa fie rendata cand acestea sunt motificate
+pe langa modificarea datelor de intrare
