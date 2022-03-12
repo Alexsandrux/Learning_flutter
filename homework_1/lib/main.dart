@@ -5,24 +5,35 @@
 
 import 'package:flutter/material.dart';
 
+import 'App.dart';
+
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _MyAppState();
+  }
+}
+
+class _MyAppState extends State {
+  List<String> textsForChangeButton = ['Hello!', 'Bye!'];
+  int textIndex = 0;
+
+  void _incrementIndex() {
+    setState(() {
+      textIndex++;
+    });
+
+    if (textIndex > textsForChangeButton.length - 1) {
+      textIndex = 0;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'First homework of the course',
-          ),
-        ),
-        body: Text(
-          'Hello there!',
-        ),
-      ),
-    );
+    return App(_incrementIndex, textsForChangeButton, textIndex);
   }
 }
