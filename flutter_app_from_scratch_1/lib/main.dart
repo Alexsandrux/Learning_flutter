@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_from_scratch_1/answer.dart';
-import 'package:flutter_app_from_scratch_1/answerChoice.dart';
-import 'package:flutter_app_from_scratch_1/question.dart';
+import './answer.dart';
+import './answerChoice.dart';
+import './question.dart';
 
 void main() {
   // main este o functie care este automat executata de flutter si dart cand aplicatia este executata
