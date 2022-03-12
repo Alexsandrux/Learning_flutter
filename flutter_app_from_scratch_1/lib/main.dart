@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_from_scratch_1/answer.dart';
+import 'package:flutter_app_from_scratch_1/answerChoice.dart';
+import 'package:flutter_app_from_scratch_1/question.dart';
 
 void main() {
   // main este o functie care este automat executata de flutter si dart cand aplicatia este executata
@@ -12,20 +15,19 @@ class MyApp extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return MyAppState();
+    return _MyAppState();
   }
 }
 
-class MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> {
   // clasa mosteneste StatelessWidget.
   // fiecare widget din flutter trebuie sa extinda StalessWidget sau StatefulWidget care te obliga sa adaugi metoda build care va fi automat apelata de flutter
-  var answerIndex = 0;
+  int _answerIndex = 0;
 
-  void changeIndex(num newNumber) {
+  void _changeIndex(int newNumber) {
     setState(() {
-      answerIndex = newNumber;
+      this._answerIndex = newNumber;
     });
-    print(answerIndex);
   }
 
   @override
@@ -45,20 +47,11 @@ class MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            Text('What is 2 + 3'),
-            ElevatedButton(
-              onPressed: () => changeIndex(1),
-              child: Text('5'),
-            ),
-            ElevatedButton(
-              onPressed: () => changeIndex(2),
-              child: Text('6'),
-            ),
-            ElevatedButton(
-              onPressed: () => changeIndex(2),
-              child: Text('8'),
-            ),
-            Text(answers.elementAt(answerIndex))
+            Question('What\'s 2+3?'),
+            AnswerChoice(_changeIndex, 1, '5'),
+            AnswerChoice(_changeIndex, 2, '6'),
+            AnswerChoice(_changeIndex, 2, '8'),
+            Answer(answers.elementAt(this._answerIndex))
           ],
         ),
       ),

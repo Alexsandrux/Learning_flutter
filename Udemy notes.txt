@@ -9,3 +9,10 @@ rerendandu-se dupa ce se schimba datele de intrare
 
 Statefull widgets pe langa acest lucru avem si date interioare widget-ului care provoaca ca aplicatia sa fie rendata cand acestea sunt motificate
 pe langa modificarea datelor de intrare
+
+
+
+
+O buna conventie este sa avem doar un widget per file
+
+Punem void callback daca nu avem nimic ca parametru la functii cand dam functia ca parametru
