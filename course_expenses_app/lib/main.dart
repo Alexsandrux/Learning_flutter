@@ -1,3 +1,4 @@
+import '/widgets/chart.dart';
 import 'package:flutter/material.dart';
 
 import './widgets/new_transaction.dart';
@@ -33,22 +34,31 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> userTransactions = [
-    Transaction(
-        id: 't1', title: 'New Shirt', amount: 69.99, date: DateTime.now()),
-    Transaction(
-        id: 't2', title: 'Groceries', amount: 33.99, date: DateTime.now()),
-  ];
-  void _addNewTransaction(String txTitle, double txAmount) {
+  final List<Transaction> userTransactions = [];
+
+  List<Transaction> get _recentTransactions {
+    return userTransactions
+        .where((element) =>
+            element.date.isAfter(DateTime.now().subtract(Duration(days: 7))))
+        .toList();
+  }
+
+  void _addNewTransaction(String txTitle, double txAmount, DateTime txDate) {
     final newTx = Transaction(
       title: txTitle,
       amount: txAmount,
-      date: DateTime.now(),
+      date: txDate,
       id: DateTime.now().toString(),
     );
 
     setState(() {
       userTransactions.add(newTx);
+    });
+  }
+
+  void _deleteTransaction(String id) {
+    setState(() {
+      userTransactions.removeWhere((element) => element.id == id);
     });
   }
 
@@ -83,20 +93,15 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: Icon(Icons.add)),
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            width: double.infinity,
-            child: Card(
-              color: Colors.blue,
-              child: Text("CHART OF EXPENSES!"),
-              elevation: 5,
-            ),
-          ),
-          TransactionList(userTransactions),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Chart(_recentTransactions),
+            TransactionList(userTransactions, _deleteTransaction),
+          ],
+        ),
       ),
     );
   }
