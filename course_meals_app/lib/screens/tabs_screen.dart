@@ -1,4 +1,5 @@
 import 'package:course_meals_app/screens/categories_screen.dart';
+import '../widgets/main_drawer.dart';
 import 'package:flutter/material.dart';
 import './favorites_screen.dart';
 
@@ -8,32 +9,46 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
+  final List<Widget> _pages = [
+    CategoriesScreen(),
+    FavoritesScreen(),
+  ];
+
+  int selectedPageIndex = 0;
+
+  void _selectPage(int index) {
+    setState(() {
+      selectedPageIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("Meals"),
-          bottom: TabBar(
-            tabs: [
-              Tab(
-                icon: Icon(Icons.category),
-                text: "Categories",
-              ),
-              Tab(
-                icon: Icon(Icons.star),
-                text: "Favorites",
-              ),
-            ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Meals"),
+      ),
+      drawer: MainDrawer(),
+      body: _pages[selectedPageIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: _selectPage,
+        backgroundColor: Theme.of(context).primaryColor,
+        unselectedItemColor: Colors.white,
+        selectedItemColor: Theme.of(context).accentColor,
+        currentIndex: selectedPageIndex,
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(
+            backgroundColor: Theme.of(context).primaryColor,
+            label: "Categories",
+            icon: Icon(Icons.category),
           ),
-        ),
-        body: TabBarView(
-          children: [
-            CategoriesScreen(),
-            FavoritesScreen(),
-          ],
-        ),
+          BottomNavigationBarItem(
+            backgroundColor: Theme.of(context).primaryColor,
+            label: "Favorites",
+            icon: Icon(Icons.favorite),
+          ),
+        ],
       ),
     );
   }
